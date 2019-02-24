@@ -1,0 +1,15 @@
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.cloud:spring-cloud-config-server'
+}
+
+bootJar {
+    archiveName = 'config.jar'
+}
+
+docker {
+    dependsOn bootJar
+    name 'config'
+    copySpec.from("build").into("build")
+}
+

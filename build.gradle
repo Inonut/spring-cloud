@@ -1,0 +1,70 @@
+buildscript {java:8-alpine
+    ext {
+        springBootVersion = "2.1.3.RELEASE"
+        springCloudVersion = "Greenwich.RELEASE"
+        gradleDocker = "0.21.0"
+        dependenciyManagement = "1.0.6.RELEASE"
+        jdk = 1.8
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:$dependenciyManagement"
+        classpath "com.palantir.gradle.docker:gradle-docker:$gradleDocker"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    group 'learn.template'
+    version '1.0-SNAPSHOT'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'com.palantir.docker'
+    apply plugin: 'com.palantir.docker-run'
+    apply plugin: "io.spring.dependency-management"
+
+    sourceCompatibility = jdk
+    targetCompatibility = jdk
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:$springBootVersion"
+        }
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+    }
+
+    bootJar {
+        excludeDevtools = false
+    }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    }
+}
+
+
+task dockerAll() {
+    subprojects { pr -> dockerAll.dependsOn("${pr.path}:docker") }
+}
+
