@@ -1,4 +1,4 @@
-buildscript {java:8-alpine
+buildscript {
     ext {
         springBootVersion = "2.1.3.RELEASE"
         springCloudVersion = "Greenwich.RELEASE"
@@ -66,5 +66,19 @@ subprojects {
 
 task dockerAll() {
     subprojects { pr -> dockerAll.dependsOn("${pr.path}:docker") }
+}
+
+task rebuild(type:Exec) {
+    workingDir '.'
+
+    commandLine 'sh', '-c', 'docker-compose down && gradle build && docker-compose build && docker-compose up -d'
+
+    //store the output instead of printing to the console:
+    standardOutput = new ByteArrayOutputStream()
+
+    //extension method stopTomcat.output() can be used to obtain the output:
+    ext.output = {
+        return standardOutput.toString()
+    }
 }
 

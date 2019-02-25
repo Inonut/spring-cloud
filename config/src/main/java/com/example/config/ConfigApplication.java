@@ -17,7 +17,7 @@ public class ConfigApplication {
 
     @GetMapping("/")
     public String asd() {
-        return "asdsss-ww";
+        return "asdsss-eeeeeee";
     }
 
 }
