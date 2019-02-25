@@ -12,12 +12,31 @@ services:
 
   config:
     environment:
-      CONFIG_SERVICE_PASSWORD: asdd
+      CONFIG_SERVICE_PASSWORD: CONFIG_SERVICE_PASSWORD
     image: config
     build: config
     restart: always
     ports:
       - 8888:8888
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health || exit 1"]
+      interval: 30s
+      timeout: 30s
+
+  registry:
+    environment:
+      CONFIG_SERVICE_PASSWORD: CONFIG_SERVICE_PASSWORD
+    image: registry
+    build: registry
+    restart: always
+    depends_on:
+      - config
+    ports:
+      - 8761:8761
     logging:
       options:
         max-size: "10m"

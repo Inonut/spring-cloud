@@ -13,5 +13,8 @@ spring:
   devtools:
     remote:
       secret: reload
+
+  application:
+    name: config
 server:
   port: 8888

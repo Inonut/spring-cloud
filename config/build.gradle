@@ -7,9 +7,3 @@ bootJar {
     archiveName = 'config.jar'
 }
 
-docker {
-    dependsOn bootJar
-    name 'config'
-    copySpec.from("build").into("build")
-}
-
