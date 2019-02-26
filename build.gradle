@@ -71,7 +71,7 @@ task dockerAll() {
 task rebuild(type:Exec) {
     workingDir '.'
 
-    commandLine 'sh', '-c', 'docker-compose down && gradle build && docker-compose build && docker-compose up -d'
+    commandLine 'sh', '-c', 'docker-compose down --remove-orphans && gradle build && docker-compose build && docker-compose up -d'
 
     //store the output instead of printing to the console:
     standardOutput = new ByteArrayOutputStream()

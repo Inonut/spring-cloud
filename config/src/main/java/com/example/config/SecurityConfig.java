@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/.~~spring-boot!~/**").permitAll()
+//                .antMatchers("/.~~spring-boot!~/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
