@@ -42,41 +42,29 @@ services:
         max-size: "10m"
         max-file: "10"
 
-#  mongodb:
-#    image: mongo
-#    build: mongodb
-#    restart: always
-#    environment:
-#      MONGO_INITDB_ROOT_USERNAME: user
-#      MONGO_INITDB_ROOT_PASSWORD: MONGODB_PASSWORD
-#      MONGO_INITDB_DATABASE: springCloud
-#    ports:
-#      - 27017:27017
-#    volumes:
-#      - /data/db:/data/db
-#
-#  mongo-express:
-#    image: mongo-express
-#    restart: always
-#    ports:
-#      - 8081:8081
-#    environment:
-#      ME_CONFIG_MONGODB_ADMINUSERNAME: user
-#      ME_CONFIG_MONGODB_ADMINPASSWORD: MONGODB_PASSWORD
-
-  mongo:
+  mongodb:
     image: mongodb
     build: mongodb
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: MONGODB_PASSWORD
+      MONGO_INITDB_DATABASE: springCloud
+    volumes:
+      - 'mongodb:/data/db'
 
   mongo-express:
     image: mongo-express
     restart: always
     ports:
       - 8081:8081
+    links:
+      - mongodb:mongo
+    depends_on:
+      - mongodb
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_ADMINUSERNAME: user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: MONGODB_PASSWORD
+      
+volumes:
+  mongodb:
