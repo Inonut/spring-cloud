@@ -1,3 +1,3 @@
 FROM mongo:latest
 
-ADD ./initDB/* /docker-entrypoint-initdb.d/
+ADD ./initDB/ /docker-entrypoint-initdb.d/
