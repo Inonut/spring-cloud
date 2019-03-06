@@ -22,6 +22,8 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
     }
 
     group 'learn.template'
@@ -71,7 +73,7 @@ task dockerAll() {
 task rebuild(type:Exec) {
     workingDir '.'
 
-    commandLine 'sh', '-c', 'docker-compose down --remove-orphans && gradle build && docker-compose build && docker-compose up -d'
+    commandLine 'sh', '-c', 'docker-compose down --remove-orphans && gradle build -x test && docker-compose build && docker-compose up -d'
 
     //store the output instead of printing to the console:
     standardOutput = new ByteArrayOutputStream()

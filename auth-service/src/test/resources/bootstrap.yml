@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      username: user
+      password: MONGODB_PASSWORD
+      database: springCloud
+      port: 27017
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+      password: CONFIG_SERVICE_PASSWORD
+      username: user

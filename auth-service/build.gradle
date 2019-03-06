@@ -1,0 +1,20 @@
+dependencies {
+
+    compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    compile 'org.springframework.boot:spring-boot-starter-web' //for eureka client to prevent unregistered
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+//    compile 'org.springframework.boot:spring-boot-starter-security'
+
+//    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    compile 'org.springframework.cloud:spring-cloud-starter-config'
+//    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+//    compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
+
+    compile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.50.3'
+//    compile 'com.jayway.jsonpath:json-path:2.4.0'
+//    compile 'javax.servlet:javax.servlet-api:4.0.1'
+}
+
+bootJar {
+    archiveName = 'auth-service.jar'
+}

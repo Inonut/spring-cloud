@@ -24,10 +24,6 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health || exit 1"]
-      interval: 30s
-      timeout: 30s
 
   registry:
     environment:
@@ -68,3 +64,23 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: user
       ME_CONFIG_MONGODB_ADMINPASSWORD: MONGODB_PASSWORD
+
+#  auth-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: CONFIG_SERVICE_PASSWORD
+#      NOTIFICATION_SERVICE_PASSWORD: NOTIFICATION_SERVICE_PASSWORD
+#      STATISTICS_SERVICE_PASSWORD: STATISTICS_SERVICE_PASSWORD
+#      ACCOUNT_SERVICE_PASSWORD: ACCOUNT_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: MONGODB_PASSWORD
+#    image: auth-service
+#    build: auth-service
+#    restart: always
+#    ports:
+#      - 5000:5000
+#    depends_on:
+#      - configserver
+#    logging:
+#      options:
+#        max-size: "10m"
+#        max-file: "10"
+

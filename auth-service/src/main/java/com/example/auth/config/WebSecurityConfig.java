@@ -1,22 +1,20 @@
-package com.example.config;
+package com.example.auth.config;
+/*
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/actuator/**").permitAll()
-//                .antMatchers("/.~~spring-boot!~/**").permitAll()
-                .anyRequest().authenticated()
+                .authorizeRequests().anyRequest().authenticated()
                 .and()
-                .httpBasic()
-        ;
+                .csrf().disable();
     }
+
 }
+*/
